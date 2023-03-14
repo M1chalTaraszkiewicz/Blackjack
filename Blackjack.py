@@ -9,23 +9,6 @@ print("Start!")
 choice = "Hit"
 
 def primary_loop(croupier, player, choice):
-    if croupier < 17:
-        print("\nCroupier's move:", "\nCroupier's choose: Hit")
-        croupier += Hit()
-        if croupier > 21:
-            return print("\n--- You won! ---", "\nValue of croupier's cards:", croupier, "   Value of your cards:", player)
-        if croupier == 21:
-            return print("\n--- You lost! ---", "\nValue of croupier's cards:", croupier, "   Value of your cards:", player)
-    if choice == "Hit":
-        print("Your move!")
-        choice = input("Choose Hit or Stand:")
-        print("Your choose:", choice)
-        if choice == "Hit":
-            player += Hit()
-            if player > 21:
-                return print("\n--- You lost! ---", "\nValue of croupier's cards:", croupier, "   Value of your cards:", player)
-            if player == 21:
-                return print("\n--- You won! ---", "\nValue of croupier's cards:", croupier, "   Value of your cards:", player)
     if choice == "Stand":
         print("\nValue of your cards: ", player)
         if choice == "Stand" and croupier >= 17:
@@ -35,6 +18,32 @@ def primary_loop(croupier, player, choice):
                 return print("\n--- You lost! ---", "\nValue of croupier's cards:", croupier, "   Value of your cards:", player)
             if player == croupier:
                 return print("\n--- Draw! ---")
+
+    if croupier < 17:
+        print("\nCroupier's move:", "\nCroupier's choose: Hit")
+        croupier += Hit()
+        if croupier > 21:
+            return print("\n--- You won! ---", "\nValue of croupier's cards:", croupier, "   Value of your cards:", player)
+        if croupier == 21:
+            return print("\n--- You lost! ---", "\nValue of croupier's cards:", croupier, "   Value of your cards:", player)
+    else:
+        print("\nCroupier's move:", "\nCroupier's choose: Stand\n")
+
+    if choice == "Hit":
+        print("Your move!")
+        choice = input("Choose Hit or Stand:")
+        while choice not in ["Hit", "Stand"]:
+            choice = input("Please choose Hit or Stand:")
+            if choice not in ["Hit", "Stand"]:
+                print("Invalid input. Please choose Hit or Stand.")
+        print("Your choose:", choice)
+        if choice == "Hit":
+            player += Hit()
+            if player > 21:
+                return print("\n--- You lost! ---", "\nValue of croupier's cards:", croupier, "   Value of your cards:", player)
+            if player == 21:
+                return print("\n--- You won! ---", "\nValue of croupier's cards:", croupier, "   Value of your cards:", player)
+
     print("Value of croupier's cards:", croupier, "   Value of your cards:", player)
     primary_loop(croupier, player, choice)
 
